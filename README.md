@@ -1,5 +1,5 @@
-# General Template
-This is a general repository template for all projects done by the organization lazybytez. You can use it if you want. Just be sure to modify the names and emails.
+# Custom / Collected Eggs
+In this reposetory i collect some eggs for pterodactyl which i use for my personal activities.
 
 ---- 
 
@@ -9,8 +9,8 @@ This is a general repository template for all projects done by the organization 
 
 ----
 
-## Getting started:
-tbd
+## Links to Eggs:
+[nginx](/eggs/nginx/nginx.json)
 
 ## Contributing
 
