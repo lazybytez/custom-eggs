@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  rebase:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with: 
+        token: ${{ github.token }}
+        ref: 'develop'
+    - name: Rebase
+      run: |
+        git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+        git config --global user.email "elias.knodel@gmail.com"
+        git config --global user.name "elias-knodel"
+        git rebase remotes/origin/master
+        git push --force
