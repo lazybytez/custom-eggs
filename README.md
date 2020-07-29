@@ -10,7 +10,9 @@ In this reposetory i collect some eggs for pterodactyl which i use for my person
 ----
 
 ## Links to Eggs:
-[nginx](/eggs/nginx/nginx.json)
+
+### Sercvices:
+- [nginx-fpm](/eggs/nginx/)
 
 ## Contributing
 

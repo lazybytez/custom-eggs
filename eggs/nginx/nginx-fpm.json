@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-07-30T00:58:21+02:00",
+    "name": "nginx-generic",
+    "author": "elias.knodel@gmail.com",
+    "description": "This is a test egg",
+    "image": "alpine:latest",
+    "startup": "{{STARTUP_COMMAND}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"done\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n\r\napk update\r\napk add --no-cache git make gcc g++ python\r\n\r\ncd \/mnt\r\n\r\ngit clone ${INSTALL_REPO}\r\n\r\necho -e \"working on installing ${INSTALL_REPO}\"\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Startup command",
+            "description": "This is the command which starts the application.",
+            "env_variable": "STARTUP_COMMAND",
+            "default_value": "echo \"test\"",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Repository",
+            "description": "Diese Repo wird installiert",
+            "env_variable": "INSTALL_REPO",
+            "default_value": "https:\/\/github.com\/lazybytez\/otaku-index.git",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        }
+    ]
+}
