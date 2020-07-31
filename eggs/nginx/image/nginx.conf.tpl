@@ -7,6 +7,14 @@ events {
 }
 
 http {
+    # temporary files{
+    client_body_temp_path /tmp/nginx 1 2;
+    proxy_temp_path /tmp/nginx-proxy;
+    fastcgi_temp_path /tmp/nginx-fastcgi;
+    uwsgi_temp_path /tmp/nginx-uwsgi;
+    scgi_temp_path /tmp/nginx-scgi;
+    
+    # other
     sendfile on;
     tcp_nopush on;
     tcp_nodelay on;
@@ -16,13 +24,15 @@ http {
     default_type application/octet-stream;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
     ssl_prefer_server_ciphers on;
-    access_log /var/log/nginx/access.log;
-    error_log /var/log/nginx/error.log;
     gzip on;
     gzip_disable "msie6";
     include /etc/nginx/conf.d/*.conf;
     #include /etc/nginx/sites-enabled/*;
     server {
+        # logs
+        access_log /home/container/.container-config/nginx/logs/access.log;
+        error_log /home/container/.container-config/nginx/logs/error.log;
+
         listen $NGINX_PORT  default_server;
         root $NGINX_WEB_ROOT;
         location / {
