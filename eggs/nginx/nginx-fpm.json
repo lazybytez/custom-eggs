@@ -11,7 +11,7 @@
     "startup": "{{STARTUP_COMMAND}}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"done\"\r\n}",
+        "startup": "{\r\n    \"done\": \"success\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
