@@ -1,6 +1,7 @@
-user $NGINX_USER;
+#user $NGINX_USER;
 worker_processes auto;
-pid /run/nginx.pid;
+pid /home/container/nginx.pid;
+error_log /home/container/.container-config/nginx/logs/error.log;
 
 events {
     worker_connections 768;
@@ -19,6 +20,7 @@ http {
     tcp_nopush on;
     tcp_nodelay on;
     keepalive_timeout 65;
+
     types_hash_max_size 2048;
     include /etc/nginx/mime.types;
     default_type application/octet-stream;
@@ -26,14 +28,15 @@ http {
     ssl_prefer_server_ciphers on;
     gzip on;
     gzip_disable "msie6";
-    include /etc/nginx/conf.d/*.conf;
+    # include /etc/nginx/conf.d/*.conf;
     #include /etc/nginx/sites-enabled/*;
     server {
         # logs
         access_log /home/container/.container-config/nginx/logs/access.log;
         error_log /home/container/.container-config/nginx/logs/error.log;
 
-        listen $NGINX_PORT  default_server;
+        listen 2999 default_server;
+        # listen $NGINX_PORT  default_server;
         root $NGINX_WEB_ROOT;
         location / {
             try_files $uri $NGINX_PHP_FALLBACK$is_args$args;
@@ -41,7 +44,7 @@ http {
         location ~ $NGINX_PHP_LOCATION {
             fastcgi_pass unix:$PHP_SOCK_FILE;
             fastcgi_split_path_info ^(.+\.php)(/.*)$;
-            include fastcgi_params;
+            #include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
             fastcgi_param DOCUMENT_ROOT $realpath_root;
             internal;

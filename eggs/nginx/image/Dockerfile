@@ -7,9 +7,11 @@ FROM alpine:latest
 
 MAINTAINER LazyBytez <elias.knodel@gmail.com>
 
+# Add the container user
+RUN adduser -D -h /home/container container container
+
 # download needed software like git
-RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite fontconfig \
-    && adduser -D -h /home/container container
+RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite fontconfig
 
 # download PHP / Nginx / Supervisor
 RUN apk add nginx php php-fpm gettext supervisor \
@@ -35,6 +37,12 @@ RUN mkdir -p /run/php && touch /run/php/php7.4-fpm.sock && touch /run/php/php7.4
 # copy entrypoint
 COPY ./entrypoint.sh /entrypoint.sh
 
+RUN stat /var/lib/nginx/logs
+# Set file permissions for nginx
+RUN chown -R container:container /var/lib/nginx
+RUN chown -R container:container /var/log/nginx
+RUN stat /var/lib/nginx/logs
+
 # make a container and give him a home
 USER container
 ENV  USER=container HOME=/home/container
@@ -42,13 +50,11 @@ ENV  USER=container HOME=/home/container
 # create paths and config files for nginx and php // should have user permission because we execute it after creating the container user
 RUN mkdir -p /home/container/.container-config/php/ 
 RUN mkdir -p /home/container/.container-config/nginx/logs/
-RUN touch /home/container/.container-config/nginx/logs/access.log && touch /home/container/.container-config/nginx/logs/error.log
-RUN touch /home/container/.container-config/php/php-fpm.conf && touch /home/container/.container-config/nginx/nginx.conf
-
-RUN touch /home/container/.container-config/nginx/fastcgi_params
 
 # set this as work directory for pterodactyl
 WORKDIR /home/container
+
+EXPOSE 2999
 
 # execute entrypoint
 CMD ["/bin/bash", "/entrypoint.sh"]
