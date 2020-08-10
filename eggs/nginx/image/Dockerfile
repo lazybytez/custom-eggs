@@ -36,6 +36,10 @@ RUN mkdir -p /run/php && touch /run/php/php-fpm.sock && touch /run/php/php-fpm.p
 RUN chown -R container:container /var/lib/nginx
 RUN chown -R container:container /var/log/nginx
 
+RUN chgrp container /run/php/php-fpm.sock
+RUN chmod g+w /run/php/php-fpm.sock
+# RUN chown -R container:container /run/php/php-fpm.sock
+
 # make a container and give him a home
 USER container
 ENV  USER=container HOME=/home/container
