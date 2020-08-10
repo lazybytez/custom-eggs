@@ -37,11 +37,9 @@ RUN mkdir -p /run/php && touch /run/php/php7.4-fpm.sock && touch /run/php/php7.4
 # copy entrypoint
 COPY ./entrypoint.sh /entrypoint.sh
 
-RUN stat /var/lib/nginx/logs
 # Set file permissions for nginx
 RUN chown -R container:container /var/lib/nginx
 RUN chown -R container:container /var/log/nginx
-RUN stat /var/lib/nginx/logs
 
 # make a container and give him a home
 USER container
@@ -53,8 +51,6 @@ RUN mkdir -p /home/container/.container-config/nginx/logs/
 
 # set this as work directory for pterodactyl
 WORKDIR /home/container
-
-EXPOSE 2999
 
 # execute entrypoint
 CMD ["/bin/bash", "/entrypoint.sh"]

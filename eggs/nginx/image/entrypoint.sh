@@ -1,6 +1,7 @@
 #!/bin/bash
 cd /home/container
 
+# Supervisor stuff
 export NGINX_PORT=${NGINX_PORT:-'2999'} # ${SERVER_PORT}
 export NGINX_WEB_ROOT=${NGINX_WEB_ROOT:-'/mnt/server/project'}
 export NGINX_PHP_FALLBACK=${NGINX_PHP_FALLBACK:-'/index.php'}
