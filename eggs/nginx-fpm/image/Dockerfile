@@ -3,7 +3,7 @@
 # Creator: LazyBytez
 # ----------------------------------
 
-FROM alpine:latest
+FROM php:7.4-fpm-alpine
 
 MAINTAINER LazyBytez <elias.knodel@gmail.com>
 
@@ -14,8 +14,33 @@ RUN adduser -D -h /home/container container
 RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite fontconfig
 
 # download PHP / Nginx / Supervisor
-RUN apk add nginx php php-fpm gettext supervisor \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update && apk upgrade && apk add \
+        nginx \
+        composer \
+        gettext \ 
+        supervisor \
+        git \
+        curl \
+        zlib-dev \
+        libxml2-dev \
+        libzip-dev \
+        icu-dev \
+        freetype-dev \
+        libjpeg-turbo-dev \
+        libpng-dev \
+    && docker-php-ext-install \
+        gd \
+        zip \
+        intl \
+        mysqli \
+        pdo pdo_mysql \
+        ctype \
+        iconv \
+        json \
+        pcre \
+        session \
+        simplexml \
+        tokenizer 
 
 # remove nginx sites-enabled
 RUN rm -f /etc/nginx/sites-enabled/*
@@ -28,24 +53,6 @@ COPY nginx.conf.tpl /home/temporary/nginx.conf.tpl
 COPY php-fpm.conf.tpl /home/temporary/php-fpm.conf.tpl
 
 COPY supervisord.conf /etc/supervisord.conf
-
-# idk what this is but i copied this to
-# RUN mkdir -p /run/php && touch /run/php/php-fpm.sock && touch /run/php/php-fpm.pid
-
-# Set file permissions for nginx and php
-# RUN mkdir -p /var/lib/nginx/logs && touch /var/lib/nginx/logs/error.log
-# RUN chown -R 999:998 /var/lib/nginx/
-# RUN chmod 777 /var/lib/nginx/logs/error.log
-
-# RUN mkdir -p /var/log/php7 && touch /var/log/php7/error.log
-# RUN chown -R 999:998 /var/log/php7
-# RUN chmod 777 /var/log/php7/error.log
-
-# RUN chgrp container /run/php/php-fpm.sock
-# RUN chmod g+w /run/php/php-fpm.sock
-# RUN chown -R container:container /run/php/
-# RUN chmod 755 /run/php/
-# RUN chown -R 999:998 /run/php/
 
 # make a container and give him a home
 USER container
