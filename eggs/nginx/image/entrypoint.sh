@@ -9,9 +9,9 @@ export NGINX_PHP_LOCATION=${NGINX_PHP_LOCATION:-'^/index\.php(/|$)'}
 export NGINX_USER=${NGINX_USER:-'container'}
 export NGINX_CONF=${NGINX_CONF:-'/home/container/.container-config/nginx/nginx.conf'}
 
-export PHP_SOCK_FILE=${PHP_SOCK_FILE:-'/run/php/php-fpm.sock'}
-export PHP_USER=${PHP_USER:-'container'}
-export PHP_GROUP=${PHP_GROUP:-'container'}
+export PHP_SOCK_FILE=${PHP_SOCK_FILE:-'/home/container/.container-config/php/donttouch/php-fpm.sock'}
+export PHP_USER=${PHP_USER:-'999'}
+export PHP_GROUP=${PHP_GROUP:-'998'}
 export PHP_MODE=${PHP_MODE:-'0660'}
 export PHP_FPM_CONF=${PHP_FPM_CONF:-'/home/container/.container-config/php/php-fpm.conf'}
 

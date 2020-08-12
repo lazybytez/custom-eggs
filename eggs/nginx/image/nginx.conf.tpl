@@ -35,8 +35,7 @@ http {
         access_log /home/container/.container-config/nginx/logs/access.log;
         error_log /home/container/.container-config/nginx/logs/error.log;
 
-        listen 2999 default_server;
-        # listen $NGINX_PORT  default_server;
+        listen $NGINX_PORT default_server;
         root $NGINX_WEB_ROOT;
         location / {
             try_files $uri $NGINX_PHP_FALLBACK$is_args$args;

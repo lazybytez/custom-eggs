@@ -30,15 +30,22 @@ COPY php-fpm.conf.tpl /home/temporary/php-fpm.conf.tpl
 COPY supervisord.conf /etc/supervisord.conf
 
 # idk what this is but i copied this to
-RUN mkdir -p /run/php && touch /run/php/php-fpm.sock && touch /run/php/php-fpm.pid
+# RUN mkdir -p /run/php && touch /run/php/php-fpm.sock && touch /run/php/php-fpm.pid
 
-# Set file permissions for nginx
-RUN chown -R container:container /var/lib/nginx
-RUN chown -R container:container /var/log/nginx
+# Set file permissions for nginx and php
+# RUN mkdir -p /var/lib/nginx/logs && touch /var/lib/nginx/logs/error.log
+# RUN chown -R 999:998 /var/lib/nginx/
+# RUN chmod 777 /var/lib/nginx/logs/error.log
 
-RUN chgrp container /run/php/php-fpm.sock
-RUN chmod g+w /run/php/php-fpm.sock
-# RUN chown -R container:container /run/php/php-fpm.sock
+# RUN mkdir -p /var/log/php7 && touch /var/log/php7/error.log
+# RUN chown -R 999:998 /var/log/php7
+# RUN chmod 777 /var/log/php7/error.log
+
+# RUN chgrp container /run/php/php-fpm.sock
+# RUN chmod g+w /run/php/php-fpm.sock
+# RUN chown -R container:container /run/php/
+# RUN chmod 755 /run/php/
+# RUN chown -R 999:998 /run/php/
 
 # make a container and give him a home
 USER container
