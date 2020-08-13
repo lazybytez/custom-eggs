@@ -3,21 +3,21 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-08-10T21:00:48+02:00",
-    "name": "nginx-generic",
+    "exported_at": "2020-08-13T01:56:29+02:00",
+    "name": "nginx-fpm",
     "author": "elias.knodel@gmail.com",
-    "description": "This is a test egg",
-    "image": "lazybytez\/egg_nginx:edge",
-    "startup": "{{STARTUP_COMMAND}}",
+    "description": "This is a egg for setting up nginx and php webservices.",
+    "image": "lazybytez\/eggs:nginx-php-stable",
+    "startup": "composer install -d {{COMPOSER_ROOT}} && {{STARTUP_COMMAND}}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"success\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Up and running!\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "kill -SIGTERM $(cat \/home\/container\/supervisord.pid) && exit;"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n\r\napk update\r\napk add --no-cache git make gcc g++ python\r\n\r\ncd \/mnt\/server\r\n\r\ngit clone ${INSTALL_REPO} project\r\n\r\necho -e \"working on installing ${INSTALL_REPO}\"\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "script": "#!\/bin\/ash\r\n\r\napk update\r\napk add --no-cache git make gcc g++ python\r\n\r\n## add user\r\necho -e \"adding container user\"\r\nuseradd -d \/home\/container -m container -s \/bin\/bash\r\n\r\n## make folders\r\nfile1=\"\/mnt\/server\/.container-config\/nginx\/logs\/error.log\"\r\nfile2=\"\/mnt\/server\/.container-config\/php\/logs\/error.log\"\r\nfile3=\"\/mnt\/server\/.container-config\/php\/donttouch\/php-fpm.sock\"\r\nfile4=\"\/mnt\/server\/.container-config\/nginx\/fastcgi_params\"\r\nfile5=\"\/mnt\/server\/.container-config\/nginx\/fastcgi.conf\"\r\n\r\nmkdir -p \"${file1%\/*}\" && touch \"$file1\"\r\nmkdir -p \"${file2%\/*}\" && touch \"$file2\"\r\nmkdir -p \"${file3%\/*}\" && touch \"$file3\"\r\nmkdir -p \"${file4%\/*}\" && touch \"$file4\"\r\nmkdir -p \"${file5%\/*}\" && touch \"$file5\"\r\n\r\n## own server to container user\r\nchown container: \/mnt\/server\/\r\n\r\ncd \/mnt\/server\r\n\r\ngit clone ${INSTALL_REPO} project\r\n\r\necho -e \"working on installing ${INSTALL_REPO}\"\r\n\r\necho -e \"install complete\"\r\nexit 0",
             "container": "alpine:3.4",
             "entrypoint": "ash"
         }
@@ -40,6 +40,24 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string"
+        },
+        {
+            "name": "Nginx web root",
+            "description": "This is the path in which your index.php should be.",
+            "env_variable": "NGINX_ROOT",
+            "default_value": "project",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:128"
+        },
+        {
+            "name": "Composer root directory",
+            "description": "The root of your project where composer should be executed and install all the required packages",
+            "env_variable": "COMPOSER_ROOT",
+            "default_value": "project\/app\/",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:128"
         }
     ]
 }

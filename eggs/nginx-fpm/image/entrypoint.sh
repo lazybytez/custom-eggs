@@ -28,3 +28,9 @@ echo ":/home/container$ ${MODIFIED_STARTUP}"
 
 # Run the Server
 ${MODIFIED_STARTUP}
+
+# Text to indentify server startup
+echo "Up and running!"
+
+# Open a shell so you can execute symfony commands etc
+ash

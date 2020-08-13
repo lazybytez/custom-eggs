@@ -33,14 +33,13 @@ RUN apk update && apk upgrade && apk add \
         zip \
         intl \
         mysqli \
-        pdo pdo_mysql \
         ctype \
         iconv \
         json \
-        pcre \
         session \
         simplexml \
-        tokenizer 
+        tokenizer \
+        pdo pdo_mysql
 
 # remove nginx sites-enabled
 RUN rm -f /etc/nginx/sites-enabled/*
