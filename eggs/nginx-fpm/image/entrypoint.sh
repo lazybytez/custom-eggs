@@ -26,6 +26,7 @@ if ! [ -f ${NGINX_CONF} ]
         # Create script file
         mkdir -p /home/container/.container-config/scripts/
         cp /home/temporary/startup.sh /home/container/.container-config/scripts/startup.sh
+        chmod +x /home/container/.container-config/scripts/startup.sh
 fi
 
 # Custom startup script
