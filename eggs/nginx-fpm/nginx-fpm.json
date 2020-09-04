@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-09-05T01:51:30+02:00",
+    "name": "nginx-fpm",
+    "author": "elias.knodel@gmail.com",
+    "description": "This is a egg for setting up nginx and php webservices.",
+    "image": "lazybytez\/eggs:nginx-php-stable",
+    "startup": "supervisord",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Up and running!\"\r\n}",
+        "logs": "{}",
+        "stop": "kill -SIGTERM $(cat \/home\/container\/supervisord.pid) && exit;"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n\r\napk update\r\napk add --no-cache git make gcc g++ python\r\n\r\n## add user\r\necho -e \"adding container user\"\r\nuseradd -d \/home\/container -m container -s \/bin\/bash\r\n\r\n## make folders\r\nfile1=\"\/mnt\/server\/.container-config\/nginx\/logs\/error.log\"\r\nfile2=\"\/mnt\/server\/.container-config\/php\/logs\/error.log\"\r\nfile3=\"\/mnt\/server\/.container-config\/php\/donttouch\/php-fpm.sock\"\r\nfile4=\"\/mnt\/server\/.container-config\/nginx\/fastcgi_params\"\r\nfile5=\"\/mnt\/server\/.container-config\/nginx\/fastcgi.conf\"\r\n\r\nmkdir -p \"${file1%\/*}\" && touch \"$file1\"\r\nmkdir -p \"${file2%\/*}\" && touch \"$file2\"\r\nmkdir -p \"${file3%\/*}\" && touch \"$file3\"\r\nmkdir -p \"${file4%\/*}\" && touch \"$file4\"\r\nmkdir -p \"${file5%\/*}\" && touch \"$file5\"\r\n\r\n## own server to container user\r\nchown container: \/mnt\/server\/\r\n\r\ncd \/mnt\/server\r\n\r\n# download branch\r\ngit clone --single-branch --branch ${INSTALL_BRANCH} ${INSTALL_REPO} project\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Repository",
+            "description": "Diese Repo wird installiert",
+            "env_variable": "INSTALL_REPO",
+            "default_value": "https:\/\/github.com\/lazybytez\/otaku-index.git",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Branch",
+            "description": "The repository branch which will be installed. (mostly stable branches like \"master\")",
+            "env_variable": "INSTALL_BRANCH",
+            "default_value": "master",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Auto Update Repo",
+            "description": "Automticially pull the newest branch \r\ntrue;false",
+            "env_variable": "AUTO_UPDATE_REPO",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:5"
+        },
+        {
+            "name": "Project Root",
+            "description": "This is the path in which your project (composer vendor etc.) should be.",
+            "env_variable": "NGINX_ROOT",
+            "default_value": "project\/app",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:128"
+        },
+        {
+            "name": "Auto Update Composer",
+            "description": "Automticially update the composer packages\r\ntrue;false",
+            "env_variable": "AUTO_UPDATE_COMPOSER",
+            "default_value": "false",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:5"
+        }
+    ]
+}

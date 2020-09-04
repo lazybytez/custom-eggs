@@ -10,7 +10,13 @@ In this reposetory i collect some eggs for pterodactyl which i use for my person
 ----
 
 ## Links to Eggs:
-[nginx](/eggs/nginx/nginx.json)
+
+### Services:
+- [nginx-fpm](/eggs/nginx-fpm/)
+
+## DockerHub
+
+Here is the link to our dockerhub repository with just the plain Dockerfiles: [https://hub.docker.com/r/lazybytez/eggs](https://hub.docker.com/r/lazybytez/eggs)
 
 ## Contributing
 
