@@ -28,7 +28,7 @@ if ! [ -f ${NGINX_CONF} ]
 fi
 
 # Custom startup script
-./home/container/.container-config/scripts/startup.sh
+./.container-config/scripts/startup.sh
 
 # Replace Startup Variables
 MODIFIED_STARTUP=`eval echo $(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')`

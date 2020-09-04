@@ -8,5 +8,5 @@ if [ ${AUTO_UPDATE_REPO} == "true" ]
 fi
 if [ ${AUTO_UPDATE_COMPOSER} == "true" ]
     then
-        composer install -d ${NGINX_ROOT}
+        composer install -d=/home/container/${NGINX_ROOT}
 fi
