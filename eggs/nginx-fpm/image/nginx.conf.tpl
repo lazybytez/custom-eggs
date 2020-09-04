@@ -13,7 +13,7 @@ http {
     fastcgi_temp_path /tmp/nginx-fastcgi;
     uwsgi_temp_path /tmp/nginx-uwsgi;
     scgi_temp_path /tmp/nginx-scgi;
-    
+
     # other
     client_max_body_size 1m;
     sendfile on;

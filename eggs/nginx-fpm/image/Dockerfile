@@ -17,7 +17,7 @@ RUN apk add --no-cache --update curl ca-certificates openssl git tar bash sqlite
 RUN apk update && apk upgrade && apk add \
         nginx \
         composer \
-        gettext \ 
+        gettext \
         supervisor \
         git \
         curl \
