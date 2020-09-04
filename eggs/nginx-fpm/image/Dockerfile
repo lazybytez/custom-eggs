@@ -51,6 +51,10 @@ RUN mkdir -p /home/temporary
 COPY nginx.conf.tpl /home/temporary/nginx.conf.tpl
 COPY php-fpm.conf.tpl /home/temporary/php-fpm.conf.tpl
 
+# move later needed files to a temporary folder
+COPY startup.sh /home/temporary/startup.sh
+
+# copy the supervisor config
 COPY supervisord.conf /etc/supervisord.conf
 
 # make a container and give him a home

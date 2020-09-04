@@ -15,12 +15,20 @@ export PHP_FPM_CONF=${PHP_FPM_CONF:-'/home/container/.container-config/php/php-f
 # Create config files the first time they dont exist
 if ! [ -f ${NGINX_CONF} ]
     then
+        # Create files
         mkdir -p "${NGINX_CONF%/*}" && touch "$NGINX_CONF"
         mkdir -p "${PHP_FPM_CONF%/*}" && touch "$PHP_FPM_CONF"
 
+        # Fill in variables
         envsubst '${NGINX_PORT} ${NGINX_WEB_ROOT} ${NGINX_PHP_FALLBACK} ${NGINX_PHP_LOCATION} ${NGINX_CONF} ${PHP_SOCK_FILE} ${PHP_MODE} ${PHP_FPM_CONF}' < /home/temporary/nginx.conf.tpl > $NGINX_CONF
         envsubst '${NGINX_PORT} ${NGINX_WEB_ROOT} ${NGINX_PHP_FALLBACK} ${NGINX_PHP_LOCATION} ${NGINX_CONF} ${PHP_SOCK_FILE} ${PHP_MODE} ${PHP_FPM_CONF}' < /home/temporary/php-fpm.conf.tpl > $PHP_FPM_CONF
+
+        # Create script file
+        cp /home/temporary/startup.sh /home/container/.container-config/scripts/startup.sh
 fi
+
+# Custom startup script
+./home/container/.container-config/scripts/startup.sh
 
 # Replace Startup Variables
 MODIFIED_STARTUP=`eval echo $(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')`
