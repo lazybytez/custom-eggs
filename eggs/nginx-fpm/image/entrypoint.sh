@@ -24,6 +24,7 @@ if ! [ -f ${NGINX_CONF} ]
         envsubst '${NGINX_PORT} ${NGINX_WEB_ROOT} ${NGINX_PHP_FALLBACK} ${NGINX_PHP_LOCATION} ${NGINX_CONF} ${PHP_SOCK_FILE} ${PHP_MODE} ${PHP_FPM_CONF}' < /home/temporary/php-fpm.conf.tpl > $PHP_FPM_CONF
 
         # Create script file
+        mkdir -p /home/container/.container-config/scripts/
         cp /home/temporary/startup.sh /home/container/.container-config/scripts/startup.sh
 fi
 
