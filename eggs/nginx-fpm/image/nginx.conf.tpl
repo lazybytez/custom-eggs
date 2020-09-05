@@ -44,7 +44,7 @@ http {
         location ~ $NGINX_PHP_LOCATION {
             fastcgi_pass unix:$PHP_SOCK_FILE;
             fastcgi_split_path_info ^(.+\.php)(/.*)$;
-            include fastcgi.conf;
+            include /etc/nginx/fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
 
