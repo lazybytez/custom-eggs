@@ -37,15 +37,15 @@ If you want to take part in contribution, like fixing issues and contributing di
 <!-- Variables -->
 [github-team]: https://github.com/lazybytez
 
-[github-license]: https://github.com/lazybytez/general-template/blob/master/LICENSE
-[github-contribute]: https://github.com/lazybytez/general-template/blob/master/CONTRIBUTING.md
-[github-codeofconduct]: https://github.com/lazybytez/general-template/blob/master/CODE_OF_CONDUCT.md
-[github-issues]: https://github.com/lazybytez/general-template/issues
-[github-pulls]: https://github.com/lazybytez/general-template/pulls
-[github-security]: https://github.com/lazybytez/general-template/blob/master/SECURITY.md
+[github-license]: https://github.com/lazybytez/eggs/blob/master/LICENSE
+[github-contribute]: https://github.com/lazybytez/eggs/blob/master/CONTRIBUTING.md
+[github-codeofconduct]: https://github.com/lazybytez/eggs/blob/master/CODE_OF_CONDUCT.md
+[github-issues]: https://github.com/lazybytez/eggs/issues
+[github-pulls]: https://github.com/lazybytez/eggs/pulls
+[github-security]: https://github.com/lazybytez/eggs/blob/master/SECURITY.md
 
-[commit-info]: https://img.shields.io/github/last-commit/lazybytez/general-template?style=flat-square
+[commit-info]: https://img.shields.io/github/last-commit/lazybytez/eggs?style=flat-square
 
-[contributors-info]: https://img.shields.io/github/contributors/lazybytez/general-template?style=flat-square
+[contributors-info]: https://img.shields.io/github/contributors/lazybytez/eggs?style=flat-square
 
-[reposize-info]: https://img.shields.io/github/repo-size/lazybytez/general-template?style=flat-square
+[reposize-info]: https://img.shields.io/github/repo-size/lazybytez/eggs?style=flat-square
