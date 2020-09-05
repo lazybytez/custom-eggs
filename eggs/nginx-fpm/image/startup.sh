@@ -9,5 +9,5 @@ fi
 cd /home/container/
 if [ ${AUTO_UPDATE_COMPOSER} == "true" ]
     then
-        composer install -d /home/container/${NGINX_ROOT}
+        composer install -d /home/container/${PROJECT_ROOT}
 fi
