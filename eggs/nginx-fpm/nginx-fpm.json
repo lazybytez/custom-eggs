@@ -63,7 +63,7 @@
             "name": "Nginx web root",
             "description": "The public index.php for the nginx root",
             "env_variable": "NGINX_ROOT",
-            "default_value": "project\/app\/pubic",
+            "default_value": "project\/app\/public",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:64"
