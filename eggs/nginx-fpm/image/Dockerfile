@@ -5,7 +5,7 @@
 
 FROM php:7.4-fpm-alpine
 
-MAINTAINER LazyBytez <elias.knodel@gmail.com>
+LABEL LazyBytez <contact@lazybytez.de>
 
 # Add the container user
 RUN adduser -D -h /home/container container

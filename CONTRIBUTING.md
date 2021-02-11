@@ -46,11 +46,15 @@ Our project uses a very standard branching model. We have the `master` branch th
 The `develop` branch is our default branch. All contributions will be merged into ´develop´ using pull requests. If you want to contribute, fork the project and make your changes. You should create feature and bug branches. We do not use documentation branches to minify the overhead.
 
 #### Commits
-As we use squash merges in our pull requests, the commit messages of your branch are not that important. But we would be happy if you still use proper messages.
+We would be happy if you use proper commit messages.
 Orient yourself on the following commit message (Note the upper case first letter and the usage of the imperative form):
 
 ```
 Add this great new feature
+```
+or
+```
+Fix this small bug
 ```
 
 #### Pull requests

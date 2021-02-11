@@ -13,6 +13,7 @@ In this reposetory i collect some eggs for pterodactyl which i use for my person
 
 ### Services:
 - [nginx-fpm](/eggs/nginx-fpm/)
+- [vscode-server](/eggs/vscode-server/)
 
 ## DockerHub
 
