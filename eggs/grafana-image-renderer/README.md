@@ -1,4 +1,7 @@
 # grafana-image-renderer
+The Grafana Image Renderer server as an Pterodactyl egg. Combined with the official Grafana egg, you Grafana instance can render images.
+
+### Installation
 Just import the .json in the **Nests** section of Pterodactyl.
 
 The Dockerfile is available here: [DockerHub](https://hub.docker.com/r/lazybytez/eggs/tags?page=1&ordering=last_updated&name=grafana-image-renderer)
