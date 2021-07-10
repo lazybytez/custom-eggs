@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-07-10T03:01:09+02:00",
+    "name": "Grafana Image Renderer",
+    "author": "p.zarrad@outlook.de",
+    "description": "The Grafana Image Renderer server as an Pterodactyl egg. Combined with the official Grafana egg, you Grafana instance can render images.",
+    "features": null,
+    "images": [
+        "lazybytez\/eggs:grafana-image-renderer"
+    ],
+    "file_denylist": [],
+    "startup": "node \/usr\/src\/app\/build\/app.js server --config=\/home\/container\/config.json",
+    "config": {
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"service.host\": \"0.0.0.0\",\r\n            \"service.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"HTTP Server started, listening at\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\nif [ ! -f \"config.json\" ]; then\r\n# Install curl\r\napk update\r\napk add --no-cache -y curl\r\n# Download default configuration file\r\ncurl https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/grafana-image-renderer\/config.json --output config.json\r\nfi",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": []
+}
