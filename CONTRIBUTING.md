@@ -13,11 +13,10 @@ Note that you must use one of our issue templates that your issue is valid - val
 Before you create an issue, search for your subject and be sure to not create a duplicate. Always provide a clear and concise explanation of your matter of concern.
 
 ### Security issues
-If you find some really serious security issue, please don't create a GitHub issue for it in the first line - it could put all bots based on this repository onto risk.
-Send a mail to [this email][reportmail] instead, to keep it structured you can simply copy our bug template into your mail.
+Refer to the [SECURITY.md](/SECURITY.md) if you want to report some security issue.
 
 ## Contributing code
-Code contributions are great because they allow anyone to contribute to their favorite projects - in addition they help us to make progress. But there're some things to keep in mind when contributing code. You grant us a perpetual license to use your code under the MIT license in the moment you contribute something to this project. This contributing code section covers all defined standards that have nothing to do with or coding standards, as they are separated from our contribution guide - but we recommended to read them, as code that not follows them will be rejected.
+Code contributions are great because they allow anyone to contribute to their favorite projects - in addition they help us to make progress.
 
 ### First time contributors
 As a first time contributor, you might find it hard to find an issue that you can work on. To make it easier for you, some issues will be labeled as "good first issue" or so.
@@ -42,34 +41,29 @@ If you don't follow this guidelines, your issue will be closed and labeled as in
 
 ### Pull requests, branching and commits
 #### Branching
-Our project uses a very standard branching model. We have the `master` branch that is the most stable branch. It is always the branch that ends up as a release.
-The `develop` branch is our default branch. All contributions will be merged into ´develop´ using pull requests. If you want to contribute, fork the project and make your changes. You should create feature and bug branches. We do not use documentation branches to minify the overhead.
+Our project uses a very standard branching model. Our branching modell for this repository uses the `master` branch as the main branch.
+You should create `feature/` branches when you contribute something. If you create a pull request from your forks `master` branch, the pull request will be rejected.
 
 #### Commits
-As we use squash merges in our pull requests, the commit messages of your branch are not that important. But we would be happy if you still use proper messages.
-Orient yourself on the following commit message (Note the upper case first letter and the usage of the imperative form):
+We use a modified version of the conventional commits standard. We just leave out the scope.
+The following example describes how commits should look like:
+```
+feat: add some feature
+```
 
-```
-Add this great new feature
-```
+For a list of allowed types (-> in the example `feat` is the type) take a look at our [commitlint.config.js](/commitlint.config.js).
 
 #### Pull requests
 When you're ready to create a pull request, use the predefined template for it. Choose a meaningful title (maybe the issues title will fit) and add all required labels.
 It is very important that you link the right issue in the "Solves issue" section of the template, as every PR must be the result of an open issue. 
 
 Requirements for an approved PR:
- 1. Merge into develop: You need one approving review from a collaborator or maintainer.
- 2. The CI checks have to pass.
+ 1. Merge into master: You need one approving review from a collaborator or maintainer.
+ 2. If there are some, the GitHub actions checks have to pass.
  4. All requested changes and conversations have to be resolved before the merge.
- 5. You need a linked issue that the PR solves.
- 6. Merge into master: Only develop is allowed to be merged into master.
- 7. Merge into master: You need two approving reviews. One **must** be from a maintainer.
 
 ## You're ready
 As you read this contribution guidelines, the code of conduct and most important our coding guidelines you are good to go!
-We really appreciate your work spent on contributions to our project, as people like you make the open source community great :heart:!
+We really appreciate the work you spent on contributions to our project, as people like you make the open source community great :heart:!
 
-If you have some suggestions to this contributing guidelines, feel free to suggest them!
-
-<!-- Variables -->
-[reportmail]: mailto:elias.knodel@gmail.com
+If you have some suggestions to this contribution guidelines, feel free to suggest them!

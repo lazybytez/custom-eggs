@@ -76,4 +76,4 @@ For answers to common questions about this code of conduct, see
 https://www.contributor-covenant.org/faq
 
 <!-- variables -->
-[reportmail]: mailto:elias.knodel@gmail.com
+[reportmail]: mailto:contact@lazybytez.de

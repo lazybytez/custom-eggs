@@ -1,23 +1,15 @@
-# Custom / Collected Eggs
-In this reposetory i collect some eggs for pterodactyl which i use for my personal activities.
+# Custom Eggs
+In this repository you find some custom eggs that do not fit in the official [parkervcp/eggs](https://github.com/parkervcp/eggs) repository like werbservers or very specific software.
 
----- 
+## Links to Eggs
 
-  ![commit-info][commit-info]
-  ![contributors-info][contributors-info]
-  ![reposize-info][reposize-info]
-
-----
-
-## Links to Eggs:
-
-### Services:
+### Services
 - [nginx-fpm](/eggs/nginx-fpm/)
 - [grafana-image-renderer](/eggs/grafana-image-renderer/)
 
 ## DockerHub
 
-Here is the link to our dockerhub repository with just the plain Dockerfiles: [https://hub.docker.com/r/lazybytez/eggs](https://hub.docker.com/r/lazybytez/eggs)
+Here is the link to the Docker Hub repository with the Docker images: [https://hub.docker.com/r/lazybytez/eggs](https://hub.docker.com/r/lazybytez/eggs)
 
 ## Contributing
 
@@ -44,9 +36,3 @@ If you want to take part in contribution, like fixing issues and contributing di
 [github-issues]: https://github.com/lazybytez/eggs/issues
 [github-pulls]: https://github.com/lazybytez/eggs/pulls
 [github-security]: https://github.com/lazybytez/eggs/blob/master/SECURITY.md
-
-[commit-info]: https://img.shields.io/github/last-commit/lazybytez/eggs?style=flat-square
-
-[contributors-info]: https://img.shields.io/github/contributors/lazybytez/eggs?style=flat-square
-
-[reposize-info]: https://img.shields.io/github/repo-size/lazybytez/eggs?style=flat-square

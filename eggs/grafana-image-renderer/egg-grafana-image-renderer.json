@@ -6,7 +6,7 @@
     },
     "exported_at": "2021-07-10T03:01:09+02:00",
     "name": "Grafana Image Renderer",
-    "author": "p.zarrad@outlook.de",
+    "author": "contact@lazybytez.de",
     "description": "The Grafana Image Renderer server as an Pterodactyl egg. Combined with the official Grafana egg, you Grafana instance can render images.",
     "features": null,
     "images": [
