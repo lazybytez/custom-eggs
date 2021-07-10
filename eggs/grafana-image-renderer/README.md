@@ -1,7 +1,7 @@
 # grafana-image-renderer
 Just import the .json in the **Nests** section of Pterodactyl.
 
-The Dockerfile is available here: [DockerHub](https://hub.docker.com/repository/docker/lazybytez/eggs/)
+The Dockerfile is available here: [DockerHub](https://hub.docker.com/r/lazybytez/eggs/tags?page=1&ordering=last_updated&name=grafana-image-renderer)
 
 ### Configuration
 Update your Grafana configuration to point to the right locations:
