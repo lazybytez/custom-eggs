@@ -4,7 +4,6 @@ In this repository you find some custom eggs that do not fit in the official [pa
 ## Links to Eggs
 
 ### Services
-- [nginx-fpm](/eggs/nginx-fpm/)
 - [grafana-image-renderer](/eggs/grafana-image-renderer/)
 
 ## DockerHub
