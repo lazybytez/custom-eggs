@@ -13,8 +13,7 @@ Here is the link to the Docker Hub repository with the Docker images: [https://h
 
 ## Webservers and Nginx
 
-We once had a `nginx / php` egg. But The problem is that nginx is **not secure** to use with pterodactyl. So we won't do any **NGINX** related eggs anymore.   
-But other webservers like **Caddy** etc. which don't use root are welcome.
+We had a `nginx / php` egg in this repository which has been removed. The NGINX egg did not reach the quality standard we wanted and was **not really secure**. The NGINX egg has been replaced with a Caddy egg that is way more configurable and secure.
 
 ## Contributing
 
