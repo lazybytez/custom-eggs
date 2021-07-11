@@ -1,5 +1,5 @@
 # Custom Eggs
-In this repository you find some custom eggs that do not fit in the official [parkervcp/eggs](https://github.com/parkervcp/eggs) repository like werbservers or very specific software.
+In this repository you find some custom eggs that do not fit in the official [parkervcp/eggs](https://github.com/parkervcp/eggs) repository like webservers or very specific software.
 
 ## Links to Eggs
 
@@ -9,6 +9,10 @@ In this repository you find some custom eggs that do not fit in the official [pa
 ## DockerHub
 
 Here is the link to the Docker Hub repository with the Docker images: [https://hub.docker.com/r/lazybytez/eggs](https://hub.docker.com/r/lazybytez/eggs)
+
+## Webservers and Nginx
+
+We had a `nginx / php` egg in this repository which has been removed. The NGINX egg did not reach the quality standard we wanted and was **not really secure**. The NGINX egg has been replaced with a Caddy egg that is way more configurable and secure.
 
 ## Contributing
 
