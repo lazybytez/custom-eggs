@@ -1,5 +1,5 @@
 # Custom Eggs
-In this repository you find some custom eggs that do not fit in the official [parkervcp/eggs](https://github.com/parkervcp/eggs) repository like werbservers or very specific software.
+In this repository you find some custom eggs that do not fit in the official [parkervcp/eggs](https://github.com/parkervcp/eggs) repository like webservers or very specific software.
 
 ## Links to Eggs
 
@@ -10,6 +10,11 @@ In this repository you find some custom eggs that do not fit in the official [pa
 ## DockerHub
 
 Here is the link to the Docker Hub repository with the Docker images: [https://hub.docker.com/r/lazybytez/eggs](https://hub.docker.com/r/lazybytez/eggs)
+
+## Webservers and Nginx
+
+We once had a `nginx / php` egg. But The problem is that nginx is **not secure** to use with pterodactyl. So we won't do any **NGINX** related eggs anymore.   
+But other webservers like **Caddy** etc. which don't use root are welcome.
 
 ## Contributing
 
