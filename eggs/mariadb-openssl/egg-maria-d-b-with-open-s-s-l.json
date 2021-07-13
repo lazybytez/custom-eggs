@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-07-13T11:17:00+02:00",
+    "exported_at": "2021-07-13T11:34:23+02:00",
     "name": "MariaDB with OpenSSL",
     "author": "contact@lazybytez.de",
     "description": "One of the most popular database servers. Made by the original developers of MySQL. Guaranteed to stay open source. Including automated self-signed SSL certificate generation.",
@@ -30,7 +30,7 @@
     "variables": [
         {
             "name": "Certificate Expiration",
-            "description": "The time until the certificate expires in days",
+            "description": "The time until the generated certificate expires in days",
             "env_variable": "SSL_EXPIRATION",
             "default_value": "365",
             "user_viewable": true,
@@ -102,7 +102,7 @@
         },
         {
             "name": "CA DN: Common Name",
-            "description": "The common name (your FQDN or your name) supplied for the DN of your CA certificate.",
+            "description": "The common name (your FQDN or your name) supplied for the DN of your CA certificate. This should NOT match the \"Server DN: Common Name\" or \"Client DN: Common Name\".",
             "env_variable": "SSL_CA_DN_COMMON_NAME",
             "default_value": "",
             "user_viewable": true,
@@ -111,7 +111,7 @@
         },
         {
             "name": "Server DN: Common Name",
-            "description": "The common name (your FQDN or your name) supplied for the DN of your server certificate.",
+            "description": "The common name (your FQDN or your name) supplied for the DN of your server certificate. This should NOT match the \"CA DN: Common Name\".",
             "env_variable": "SSL_SERVER_DN_COMMON_NAME",
             "default_value": "",
             "user_viewable": true,
@@ -120,7 +120,7 @@
         },
         {
             "name": "Client DN: Common Name",
-            "description": "The common name (your FQDN or your name) supplied for the DN of your client certificate.",
+            "description": "The common name (your FQDN or your name) supplied for the DN of your client certificate. This should NOT match the \"CA DN: Common Name\".",
             "env_variable": "SSL_CLIENT_DN_COMMON_NAME",
             "default_value": "",
             "user_viewable": true,
