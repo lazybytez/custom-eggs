@@ -11,8 +11,8 @@ As the certicate is self-signed, you should think twice when it is appropriate t
 Just import the .json in the **Nests** section of Pterodactyl.
 
 ### Configuration
-A certificate will always beign generated and configured.
-You can specify the CN and period how long the certificate should be valid through variables.
+A certificate will always being generated and configured.
+You can specify the DN and period how long the certificate should be valid through variables.
 
 The certificates are being generated during server installation. If your certificate runs out, run installation script to reinstall the server.
 
