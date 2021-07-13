@@ -1,0 +1,131 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-07-13T11:17:00+02:00",
+    "name": "MariaDB with OpenSSL",
+    "author": "contact@lazybytez.de",
+    "description": "One of the most popular database servers. Made by the original developers of MySQL. Guaranteed to stay open source. Including automated self-signed SSL certificate generation.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:db_mariadb"
+    ],
+    "file_denylist": [],
+    "startup": "{ \/usr\/sbin\/mysqld & } && sleep 5 && mysql -u root",
+    "config": {
+        "files": "{\r\n    \".my.cnf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port = {{server.build.default.port}}\",\r\n            \"bind-address\": \"bind-address=0.0.0.0\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"mysqld: ready for connections\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown; exit;"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Install installation time dependencies\r\napt-get -y update\r\napt-get -y install curl openssl\r\n# Prepare certificate\r\nif [ ! -d \"\/mnt\/server\/certificates\" ] || [ ! -f \"\/mnt\/server\/certificates\/ca.pem\" ] || [ \"${SSL_REGENERATE}\" == \"true\" ]; then\r\n# If certificates directory exists, remove it with its content\r\nrm -rf \/mnt\/server\/certificates\r\nmkdir -p \/mnt\/server\/certificates\r\ncd \/mnt\/server\/certificates\r\n# Generate certificates\r\ndistinguishedNameCA=\"\/C=${SSL_DN_COUNTRY_CODE}\/ST=${SSL_DN_STATE_NAME}\/L=${SSL_DN_LOCALITY_NAME}\/O=${SSL_DN_COMPANY_NAME}\/OU=${SSL_DN_ORGANIZATIONAL_UNIT_NAME}\/CN=${SSL_CA_DN_COMMON_NAME}\/emailAddress=${SSL_DN_EMAIL}\"\r\ndistinguishedNameServer=\"\/C=${SSL_DN_COUNTRY_CODE}\/ST=${SSL_DN_STATE_NAME}\/L=${SSL_DN_LOCALITY_NAME}\/O=${SSL_DN_COMPANY_NAME}\/OU=${SSL_DN_ORGANIZATIONAL_UNIT_NAME}\/CN=${SSL_SERVER_DN_COMMON_NAME}\/emailAddress=${SSL_DN_EMAIL}\"\r\ndistinguishedNameClient=\"\/C=${SSL_DN_COUNTRY_CODE}\/ST=${SSL_DN_STATE_NAME}\/L=${SSL_DN_LOCALITY_NAME}\/O=${SSL_DN_COMPANY_NAME}\/OU=${SSL_DN_ORGANIZATIONAL_UNIT_NAME}\/CN=${SSL_CLIENT_DN_COMMON_NAME}\/emailAddress=${SSL_DN_EMAIL}\"\r\necho \"Generating certificates...\"\r\nopenssl genrsa 2048 > ca-key.pem\r\nopenssl req -new -x509 -nodes -days ${SSL_EXPIRATION} -key ca-key.pem -out ca.pem -subj \"${distinguishedNameCA}\"\r\nopenssl req -newkey rsa:2048 -nodes -keyout server-key.pem -out server-req.pem -subj \"${distinguishedNameServer}\"\r\nopenssl rsa -in server-key.pem -out server-key.pem\r\nopenssl x509 -req -in server-req.pem -days ${SSL_EXPIRATION} -CA ca.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.pem\r\nopenssl req -newkey rsa:2048 -nodes -keyout client-key.pem -out client-req.pem -subj \"${distinguishedNameClient}\"\r\nopenssl rsa -in client-key.pem -out client-key.pem\r\nopenssl x509 -req -in client-req.pem -days ${SSL_EXPIRATION} -CA ca.pem -CAkey ca-key.pem -set_serial 01 -out client-cert.pem\r\nrm -f *-req.pem\r\necho \"Verifying certificates...\"\r\nopenssl verify -CAfile ca.pem server-cert.pem client-cert.pem\r\ncd \/mnt\/server\r\nfi\r\n## Prepare config for installation\r\nif [ -f \/mnt\/server\/.my.cnf ]; then\r\nmv \/mnt\/server\/.my.cnf \/mnt\/server\/custom.my.cnf\r\ncurl https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/mariadb-openssl\/install.my.cnf > \/mnt\/server\/.my.cnf\r\nelse\r\ncurl https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/mariadb-openssl\/install.my.cnf > \/mnt\/server\/.my.cnf\r\nfi\r\n## Create directories and run installation\r\nmkdir -p \/mnt\/server\/run\/mysqld\r\nmkdir -p \/mnt\/server\/log\/mysql\r\nmkdir \/mnt\/server\/mysql\r\nmysql_install_db --defaults-file=\/mnt\/server\/.my.cnf\r\n# Copy backed up config back, when there is some\r\nif [ -f \/mnt\/server\/custom.my.cnf ]; then\r\nmv \/mnt\/server\/custom.my.cnf \/mnt\/server\/.my.cnf\r\nelse\r\ncurl https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/mariadb-openssl\/my.cnf > \/mnt\/server\/.my.cnf\r\nfi",
+            "container": "mariadb:10.3",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Certificate Expiration",
+            "description": "The time until the certificate expires in days",
+            "env_variable": "SSL_EXPIRATION",
+            "default_value": "365",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|gt:0"
+        },
+        {
+            "name": "Force Certificate Generation",
+            "description": "Enter \"true\" to force the installation script to regenerate the self-signed certificate, even if some certificate already exists.\r\nIf your current certificate expires, you can temporarily set this option to true to trigger the certificate generator when running the installation script.",
+            "env_variable": "SSL_REGENERATE",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "DN: Coutry Name",
+            "description": "The country name (2 letter country code) supplied for the DN of your certificate.",
+            "env_variable": "SSL_DN_COUNTRY_CODE",
+            "default_value": "AU",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:2"
+        },
+        {
+            "name": "DN: State Name",
+            "description": "The state name supplied for the DN of your certificate.",
+            "env_variable": "SSL_DN_STATE_NAME",
+            "default_value": "Some-State",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "DN: Locality Name",
+            "description": "The name of a location (e.g. city) supplied for the DN of your certificate",
+            "env_variable": "SSL_DN_LOCALITY_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "DN: Company Name",
+            "description": "The company name supplied for the DN of your certificate.",
+            "env_variable": "SSL_DN_COMPANY_NAME",
+            "default_value": "Internet Widgits Pty Ltd",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "DN: Organizational Unit Name",
+            "description": "The organizational unit name supplied for the DN of your certificate",
+            "env_variable": "SSL_DN_ORGANIZATIONAL_UNIT_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "DN: Email Address",
+            "description": "The email address supplied for the DN of your certificate",
+            "env_variable": "SSL_DN_EMAIL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "CA DN: Common Name",
+            "description": "The common name (your FQDN or your name) supplied for the DN of your CA certificate.",
+            "env_variable": "SSL_CA_DN_COMMON_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Server DN: Common Name",
+            "description": "The common name (your FQDN or your name) supplied for the DN of your server certificate.",
+            "env_variable": "SSL_SERVER_DN_COMMON_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Client DN: Common Name",
+            "description": "The common name (your FQDN or your name) supplied for the DN of your client certificate.",
+            "env_variable": "SSL_CLIENT_DN_COMMON_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        }
+    ]
+}
