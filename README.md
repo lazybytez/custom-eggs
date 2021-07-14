@@ -4,6 +4,7 @@ In this repository you find some custom eggs that do not fit in the official [pa
 ## Links to Eggs
 
 ### Services
+- [caddy](/eggs/caddy)
 - [grafana-image-renderer](/eggs/grafana-image-renderer/)
 - [mariadb-openssl](/eggs/mariadb-openssl)
 
