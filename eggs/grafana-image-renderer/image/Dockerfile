@@ -1,3 +1,4 @@
+# Note: This image should only being build for linux/amd64
 FROM --platform=$BUILDPLATFORM grafana/grafana-image-renderer:latest
 
 LABEL author="LazyBytez" maintainer="contact@lazybytez.de"
