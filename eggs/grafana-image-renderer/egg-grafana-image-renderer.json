@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-08-05T23:15:32+02:00",
+    "exported_at": "2021-08-05T23:25:36+02:00",
     "name": "Grafana Image Renderer",
     "author": "contact@lazybytez.de",
     "description": "The Grafana Image Renderer server as an Pterodactyl egg. Combined with the official Grafana egg, you Grafana instance can render images.",
     "features": null,
     "images": [
-        "ghcr.io\/lazybytez\/ceggs:gir"
+        "ghcr.io\/lazybytez\/custom-eggs:gir"
     ],
     "file_denylist": [],
     "startup": "node \/usr\/src\/app\/build\/app.js server --config=\/home\/container\/config.json",
