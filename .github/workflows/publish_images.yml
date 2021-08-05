@@ -1,0 +1,33 @@
+name: Publish Docker images
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  push:
+    branches:
+      - master
+      - feature/**
+
+jobs:
+  push_gir:
+    name: "Grafana Image Renderer"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/setup-buildx-action@v1
+        with:
+          version: "v0.5.1"
+          buildkitd-flags: --debug
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN  }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: ./eggs/grafana-image-renderer/image
+          file: ./eggs/grafana-image-renderer/image/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/lazybytez/custom-eggs:gir
