@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - master
-      - feature/**
 
 jobs:
   push_gir:
