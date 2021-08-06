@@ -26,3 +26,8 @@ Neither plain webserver eggs are. This egg has been build as it somestimes is ju
 Pterodactyl for us and for others.
 However, before you host a production site using this egg, think about it. From a security and usability point,
 you might be (way) better of with some other solution.
+
+### Future ToDos
+ - Add cron support
+ - Improve default config(s)
+ - Reorganize files
