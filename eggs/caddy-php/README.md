@@ -18,3 +18,11 @@ The user that Pterodactyl is using is called "container" and has no root privile
 As the ports below 1025 require to be root, you must choose a port greater than 1024.
 This also means you will need a reverse proxy to make the webserver available without appending the
 port in the url.
+
+### Important
+
+This is a so called "multi egg". Multi eggs are not offically supported by Pterodactyl.
+Neither plain webserver eggs are. This egg has been build as it somestimes is just easier to do stuff with
+Pterodactyl for us and for others.
+However, before you host a production site using this egg, think about it. From a security and usability point,
+you might be (way) better of with some other solution.
