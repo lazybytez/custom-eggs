@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM php:8.0-fpm-alpine
+FROM --platform=$BUILDPLATFORM php:7.4-fpm-alpine
 
 LABEL author="LazyBytez" maintainer="contact@lazybytez.de"
 
@@ -46,6 +46,7 @@ RUN docker-php-ext-install \
         dom \
         zip \
         session \
+        json \
         sockets \
         pdo \
         mbstring \
@@ -62,12 +63,13 @@ RUN docker-php-ext-install \
         phar \
         simplexml \
         xml \
+        xmlrpc \
         xmlwriter \
         bz2
 
 # Install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/bin --filename=composer \
+    && php composer-setup.php --install-dir=/bin --filename=composer --1 \
     && php -r "unlink('composer-setup.php');"
 
 # Add container user

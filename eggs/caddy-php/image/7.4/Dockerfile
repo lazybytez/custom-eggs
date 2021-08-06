@@ -27,6 +27,8 @@ RUN apk add --update --no-cache \
     oniguruma-dev \
     sqlite3pp \
     libpng-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
     g++ \
     make \
     tar \
@@ -39,6 +41,7 @@ RUN docker-php-ext-install \
         soap \
         ftp \
         xsl \
+        bcmath \
         ctype \
         dom \
         zip \
@@ -66,7 +69,7 @@ RUN docker-php-ext-install \
 
 # Install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/bin --filename=composer\
+    && php composer-setup.php --install-dir=/bin --filename=composer \
     && php -r "unlink('composer-setup.php');"
 
 # Add container user

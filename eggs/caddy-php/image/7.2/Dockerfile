@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM php:8.0-fpm-alpine
+FROM --platform=$BUILDPLATFORM php:7.2-fpm-alpine
 
 LABEL author="LazyBytez" maintainer="contact@lazybytez.de"
 
@@ -25,7 +25,6 @@ RUN apk add --update --no-cache \
     icu-dev \
     autoconf \
     oniguruma-dev \
-    sqlite3pp \
     libpng-dev \
     freetype-dev \
     libjpeg-turbo-dev \
@@ -36,6 +35,11 @@ RUN apk add --update --no-cache \
 
 # Install PHP extensions
 # To ensure users are satified, we add more than most people will need
+RUN docker-php-ext-configure gd \
+    --with-gd \
+    --with-freetype-dir=/usr/include/ \
+    --with-png-dir=/usr/include/ \
+    --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install \
         opcache \
         soap \
@@ -46,6 +50,7 @@ RUN docker-php-ext-install \
         dom \
         zip \
         session \
+        json \
         sockets \
         pdo \
         mbstring \
@@ -53,7 +58,6 @@ RUN docker-php-ext-install \
         pgsql \
         pdo_pgsql \
         pdo_mysql \
-        pdo_sqlite \
         intl \
         mysqli \
         gd \
@@ -62,6 +66,7 @@ RUN docker-php-ext-install \
         phar \
         simplexml \
         xml \
+        xmlrpc \
         xmlwriter \
         bz2
 

@@ -67,7 +67,7 @@ RUN docker-php-ext-install \
 
 # Install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/bin --filename=composer \
+    && php composer-setup.php --install-dir=/bin --filename=composer --1 \
     && php -r "unlink('composer-setup.php');"
 
 # Add container user
