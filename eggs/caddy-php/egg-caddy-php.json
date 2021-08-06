@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-07-23T20:43:12+02:00",
+    "name": "Caddy PHP",
+    "author": "contact@lazybytez.de",
+    "description": "Fast, multi-platform web server with automatic HTTPS",
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:alpine"
+    ],
+    "file_denylist": [],
+    "startup": ".\/caddy run --config \/home\/container\/caddy.json",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"serving initial configuration\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Cleanup previous install if available\r\nfind .\/ -maxdepth 1 -type f -not -name 'caddy.json' -print0 | xargs -0 -I {} rm -fv {}\r\nfind .\/ -maxdepth 1 -type d -not -name 'www' -print0 | xargs -0 -I {} rm -rfv {}\r\n# Download and extract Caddy\r\nversion=${CADDY_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/caddyserver\/caddy\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/caddyserver\/caddy\/releases\/download\/v${version}\/caddy_${version}_linux_amd64.tar.gz --output caddy.tar.gz\r\ntar -zxvf caddy.tar.gz\r\nrm -rf caddy.tar.gz\r\n# Create default files and directories if not present\r\nif [ ! -f \"caddy.json\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy\/caddy.json --output caddy.json; fi\r\nif [ ! -d \"www\" ]; then mkdir www; fi",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Caddy Version",
+            "description": "The version of Caddy to install. By default the latest version is being installed.",
+            "env_variable": "CADDY_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
