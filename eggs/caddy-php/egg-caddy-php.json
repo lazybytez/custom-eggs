@@ -1,0 +1,48 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-08-06T22:53:32+02:00",
+    "name": "Caddy PHP",
+    "author": "contact@lazybytez.de",
+    "description": "Fast, multi-platform web server with automatic HTTPS paired with PHP-FPM to provide the possibility to host PHP powered services.",
+    "features": null,
+    "images": [
+        "ghcr.io\/lazybytez\/custom-eggs:php_8.0",
+        "ghcr.io\/lazybytez\/custom-eggs:php_8.0_composer1",
+        "ghcr.io\/lazybytez\/custom-eggs:php_7.4",
+        "ghcr.io\/lazybytez\/custom-eggs:php_7.4_composer1",
+        "ghcr.io\/lazybytez\/custom-eggs:php_7.3",
+        "ghcr.io\/lazybytez\/custom-eggs:php_7.3_composer1",
+        "ghcr.io\/lazybytez\/custom-eggs:php_7.2",
+        "ghcr.io\/lazybytez\/custom-eggs:php_7.2_composer1"
+    ],
+    "file_denylist": [],
+    "startup": ".\/start.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"serving initial configuration\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Cleanup previous install if available\r\nfind . -maxdepth 1 ! -name \"Caddyfile\" ! -name \"prestart.sh\" ! -name \"www\" ! -name \"php\" ! -name . -exec rm -rf {} \\;\r\n# Download and extract Grafana\r\nversion=${CADDY_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/caddyserver\/caddy\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/caddyserver\/caddy\/releases\/download\/v${version}\/caddy_${version}_linux_amd64.tar.gz --output caddy.tar.gz\r\ntar -zxvf caddy.tar.gz\r\nrm -rf caddy.tar.gz\r\n# Create default files and directories if not present\r\nif [ ! -f \"Caddyfile\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/Caddyfile --output Caddyfile; fi\r\nif [ ! -f \"prestart.sh\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/prestart.sh --output prestart.sh; fi\r\nif [ ! -f \"start.sh\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/start.sh --output start.sh; fi\r\nif [ ! -d \"www\" ]; then mkdir www; fi\r\nif [ ! -d \"php\" ]; then mkdir php; fi\r\nif [ ! -f \".\/php\/fpm.conf\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/\/php\/fpm.conf --output .\/php\/fpm.conf; fi\r\nif [ ! -f \".\/php\/www.conf\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/php\/www.conf --output .\/php\/www.conf; fi\r\nif [ ! -f \".\/php\/php.ini\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/php\/php.ini --output .\/php\/php.ini; fi\r\n# Set permissions for executables\r\nchmod +x start.sh\r\nchmod +x prestart.sh",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Caddy Version",
+            "description": "The version of Caddy to install. By default the latest version is being installed.",
+            "env_variable": "CADDY_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
