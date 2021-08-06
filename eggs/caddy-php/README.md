@@ -33,7 +33,6 @@ Place your commands to execute at the position marked in the file.
 This file will be executed on every server start.
 Keep in mind to remove commands you don't want to be executed again before the next restart.
 
-
 ### Important
 
 This is a so called "multi egg". Multi eggs are not offically supported by Pterodactyl.
