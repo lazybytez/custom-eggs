@@ -19,6 +19,21 @@ As the ports below 1025 require to be root, you must choose a port greater than 
 This also means you will need a reverse proxy to make the webserver available without appending the
 port in the url.
 
+**Note about reinstallation**
+The following folders will be kept during reinstallation to prevent unintentional data loss
+and must be removed manually (before pressing reinstall) for a full reinstall to happen:
+ - php
+ - www
+ - Caddyfile
+ - prestart.sh
+
+#### Executing setup tasks
+You can execute setup tasks (like `composer install`) using the `prestart.sh` file created during the installation of the egg.
+Place your commands to execute at the position marked in the file.
+This file will be executed on every server start.
+Keep in mind to remove commands you don't want to be executed again before the next restart.
+
+
 ### Important
 
 This is a so called "multi egg". Multi eggs are not offically supported by Pterodactyl.
