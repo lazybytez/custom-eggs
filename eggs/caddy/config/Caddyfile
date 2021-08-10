@@ -1,0 +1,8 @@
+:{{PTERODACTYL_PORT}} {
+	root * /home/container/www
+	encode zstd gzip
+	file_server
+	log {
+		output file /home/container/log/access.log
+	}
+}
