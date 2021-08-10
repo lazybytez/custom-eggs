@@ -1,4 +1,4 @@
-:{{PTERODACTYL_PORT}} {
+{{PTERODACTYL_PORT}} {
 	root * /home/container/www
 	encode zstd gzip
 	file_server
