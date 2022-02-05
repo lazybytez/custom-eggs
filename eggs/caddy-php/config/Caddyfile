@@ -1,10 +1,7 @@
 {{PTERODACTYL_PORT}} {
-        root * /home/container/www
-
-        log {
-                output file /home/container/access.log
-        }
-
-        # PHP-FPM with Unix socket
-        php_fastcgi unix//home/container/php/php.sock
+	root * /home/container/www
+	log {
+		output file /home/container/access.log
+	}
+	php_fastcgi unix//home/container/php/php.sock
 }
