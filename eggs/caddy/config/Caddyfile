@@ -3,6 +3,6 @@
 	encode zstd gzip
 	file_server
 	log {
-		output file /home/container/log/access.log
+		output file /home/container/.caddy/data/log/access.log
 	}
 }

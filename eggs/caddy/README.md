@@ -14,8 +14,3 @@ The user that Pterodactyl is using is called "container" and has no root privile
 As the ports below 1025 require to be root, you must choose a port greater than 1024.
 This also means you will need a reverse proxy to make the webserver available without appending the
 port in the url.
-
-### Backwads compatibility note
-In earlier versions, the egg used a `caddy.json` file for configuration, this has been exchanged in
-favor of the `Caddyfile`. The `caddy.json` is only there for a limited transition time to provide
-backwards compatibility for now.
