@@ -1,10 +1,10 @@
-:4004 {
-    root * /home/container/www
+{{PTERODACTYL_PORT}} {
+        root * /home/container/www
 
-    log {
-	    output file /home/container/access.log
-    }
+        log {
+                output file /home/container/access.log
+        }
 
-    # PHP-FPM with Unix socket
-    php_fastcgi unix//home/container/php/php.sock
+        # PHP-FPM with Unix socket
+        php_fastcgi unix//home/container/php/php.sock
 }
