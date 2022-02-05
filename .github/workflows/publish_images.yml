@@ -46,6 +46,8 @@ jobs:
           - "7.4_composer1"
           - "8.0"
           - "8.0_composer1"
+          - "8.1"
+          - "8.1_composer1"
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-buildx-action@v1
