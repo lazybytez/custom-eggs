@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM php:8.0-fpm-alpine
+FROM --platform=$BUILDPLATFORM php:8.1-fpm-alpine
 
 LABEL author="LazyBytez" maintainer="contact@lazybytez.de"
 
@@ -49,7 +49,6 @@ RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
         sockets \
         pdo \
         mbstring \
-        tokenizer \
         pgsql \
         pdo_pgsql \
         pdo_mysql \

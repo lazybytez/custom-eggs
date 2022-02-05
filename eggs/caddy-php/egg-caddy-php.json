@@ -10,6 +10,8 @@
     "description": "Fast, multi-platform web server with automatic HTTPS paired with PHP-FPM to provide the possibility to host PHP powered services.",
     "features": null,
     "images": [
+        "ghcr.io\/lazybytez\/custom-eggs:php_8.1",
+        "ghcr.io\/lazybytez\/custom-eggs:php_8.1_composer1",
         "ghcr.io\/lazybytez\/custom-eggs:php_8.0",
         "ghcr.io\/lazybytez\/custom-eggs:php_8.0_composer1",
         "ghcr.io\/lazybytez\/custom-eggs:php_7.4",
