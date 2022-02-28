@@ -13,9 +13,6 @@ In this repository you find some custom eggs that do not fit in the official [pa
 Images used by the eggs of this repository can be found on ghcr.
 Refer to the packages section and choose [custom-eegs](https://github.com/lazybytez/custom-eggs/pkgs/container/custom-eggs) of the repository to see all available tags.
 
-## Webservers and Nginx
-We had a `nginx / php` egg in this repository which has been removed. The NGINX egg did not reach the quality standard we wanted and was **not really secure**. The NGINX egg has been replaced with a Caddy egg that is way more configurable and secure.
-
 ## Contributing
 
 If you want to take part in contribution, like fixing issues and contributing directly to the code base, plase visit the [How to Contribute][github-contribute] document.
