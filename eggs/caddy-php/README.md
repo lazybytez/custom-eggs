@@ -5,13 +5,11 @@ Fast, multi-platform web server with automatic HTTPS paired with PHP-FPM to prov
 Just import the .json in the **Nests** section of Pterodactyl.
 
 ### Configuration
-As the configuration of a webserver can be tough, the egg will create a default `Caddyfile` file.
-This default configuration file disables the admin area and provides the configuration to serve static files
-out of the automatically created `www` directory.
+As the configuration of a webserver can be tough, the egg will create a default `Caddyfile` file under `/home/container/.runtime/caddy`.
+This default configuration file provides the configuration to serve an application from the automatically created `www` directory.
+Depending on your application, you might have to adjust the `root` path in the webserver configuration.
 
-You MUST adjust the port in the `Caddyfile` file manually. The port should match your allocated port.
-You can allocate additional ports and host mutliple sites using a single server. This will **always** require properly 
-setup ports in the `Caddyfile` file.
+Note that configuration done in the `.runtime` directory needs to be backed up, as the directory is recreated upon reinstallation.
 
 **Note about ports**
 The user that Pterodactyl is using is called "container" and has no root privileges. 
@@ -20,11 +18,10 @@ This also means you will need a reverse proxy to make the webserver available wi
 port in the url.
 
 **Note about reinstallation**
-The following folders will be kept during reinstallation to prevent unintentional data loss
+The following files and folders will be kept during reinstallation to prevent unintentional data loss
 and must be removed manually (before pressing reinstall) for a full reinstall to happen:
- - php
  - www
- - Caddyfile
+ - logs
  - prestart.sh
 
 #### Executing setup tasks
@@ -42,6 +39,4 @@ However, before you host a production site using this egg, think about it. From 
 you might be (way) better of with some other solution.
 
 ### Future ToDos
- - Add cron support
- - Improve default config(s)
- - Reorganize files
+ - Add (optional) cron support
