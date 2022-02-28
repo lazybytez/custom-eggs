@@ -1,0 +1,7 @@
+{{PTERODACTYL_PORT}} {
+	root * /home/container/www
+	log {
+		output file /home/container/logs/access.log
+	}
+	php_fastcgi unix//home/container/.runtime/php/proc/php.sock
+}

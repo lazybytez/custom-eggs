@@ -4,10 +4,10 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2022-02-05T19:30:24+01:00",
+    "exported_at": "2022-02-28T21:06:39+01:00",
     "name": "Caddy PHP",
     "author": "contact@lazybytez.de",
-    "description": "Fast, multi-platform web server with automatic HTTPS paired with PHP-FPM to provide the possibility to host PHP powered services.",
+    "description": "Fast, multi-platform web server with automatic HTTPS paired with PHP-FPM to provide the possibility to host PHP powered services.\r\nNote: Doesn't support crons. Initialization tasks can be done through a preflight script.",
     "features": null,
     "images": [
         "ghcr.io\/lazybytez\/custom-eggs:php_8.1",
@@ -22,16 +22,16 @@
         "ghcr.io\/lazybytez\/custom-eggs:php_7.2_composer1"
     ],
     "file_denylist": [],
-    "startup": ".\/start.sh",
+    "startup": ".\/.runtime\/start.sh",
     "config": {
-        "files": "{\r\n    \"Caddyfile\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"{{PTERODACTYL_PORT}}\": \":{{server.build.default.port}} {\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \".runtime\/caddy\/Caddyfile\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"{{PTERODACTYL_PORT}}\": \":{{server.build.default.port}} {\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"serving initial configuration\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Cleanup previous install if available\r\nfind . -maxdepth 1 ! -name \"Caddyfile\" ! -name \"prestart.sh\" ! -name \"www\" ! -name \"php\" ! -name . -exec rm -rf {} \\;\r\n# Download and extract Grafana\r\nversion=${CADDY_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/caddyserver\/caddy\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/caddyserver\/caddy\/releases\/download\/v${version}\/caddy_${version}_linux_amd64.tar.gz --output caddy.tar.gz\r\ntar -zxvf caddy.tar.gz\r\nrm -rf caddy.tar.gz\r\n# Create default files and directories if not present\r\nif [ ! -f \"Caddyfile\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/Caddyfile --output Caddyfile; fi\r\nif [ ! -f \"prestart.sh\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/prestart.sh --output prestart.sh; fi\r\nif [ ! -f \"start.sh\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/start.sh --output start.sh; fi\r\nif [ ! -d \"www\" ]; then mkdir www; fi\r\nif [ ! -d \"php\" ]; then mkdir php; fi\r\nif [ ! -f \".\/php\/fpm.conf\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/\/php\/fpm.conf --output .\/php\/fpm.conf; fi\r\nif [ ! -f \".\/php\/www.conf\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/php\/www.conf --output .\/php\/www.conf; fi\r\nif [ ! -f \".\/php\/php.ini\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/php\/php.ini --output .\/php\/php.ini; fi\r\n# Set permissions for executables\r\nchmod +x start.sh\r\nchmod +x prestart.sh",
+            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Cleanup previous install if available\r\nfind . -maxdepth 1 ! -name \"prestart.sh\" ! -name \"www\" ! -name \"logs\" ! -name . -exec rm -rf {} \\;\r\n# Download and extract Caddy\r\nif [ ! -d \".runtime\/caddy\" ]; then mkdir -p .runtime\/caddy; fi\r\nversion=${CADDY_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/caddyserver\/caddy\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/caddyserver\/caddy\/releases\/download\/v${version}\/caddy_${version}_linux_amd64.tar.gz --output caddy.tar.gz\r\ntar -zxvf caddy.tar.gz -C .runtime\/caddy\r\nrm -rf caddy.tar.gz\r\n# Create default files and directories if not present\r\n# Create Caddy and startup files\r\nif [ ! -f \".runtime\/caddy\/Caddyfile\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/caddy\/Caddyfile --output .runtime\/caddy\/Caddyfile; fi\r\nif [ ! -f \".runtime\/caddy\/.env\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/caddy\/.env --output .runtime\/caddy\/.env; fi\r\nif [ ! -f \"prestart.sh\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/prestart.sh --output prestart.sh; fi\r\nif [ ! -f \".runtime\/start.sh\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/start.sh --output .runtime\/start.sh; fi\r\n# Configure PHP\r\nif [ ! -d \".runtime\/php\/proc\" ]; then mkdir -p .runtime\/php\/proc; fi\r\nif [ ! -f \".runtime\/php\/fpm.conf\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/\/php\/fpm.conf --output .runtime\/php\/fpm.conf; fi\r\nif [ ! -f \".runtime\/php\/www.conf\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/php\/www.conf --output .runtime\/php\/www.conf; fi\r\nif [ ! -f \".runtime\/php\/php.ini\" ]; then curl -L https:\/\/raw.githubusercontent.com\/lazybytez\/custom-eggs\/master\/eggs\/caddy-php\/config\/php\/php.ini --output .runtime\/php\/php.ini; fi\r\n# Create data dirs\r\nif [ ! -d \"www\" ]; then mkdir www; fi\r\nif [ ! -d \"logs\" ]; then mkdir logs; fi\r\n# Set permissions for executables\r\nchmod +x .runtime\/start.sh\r\nchmod +x prestart.sh",
             "container": "ghcr.io\/pterodactyl\/installers:alpine",
             "entrypoint": "ash"
         }
