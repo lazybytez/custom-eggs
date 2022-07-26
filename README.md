@@ -15,6 +15,18 @@
 ## Description
 In this repository you find some custom eggs that do not fit in the official [parkervcp/eggs](https://github.com/parkervcp/eggs) repository like webservers or very specific software.
 
+**Important:** 
+ - The eggs in this repository are not affiliated with the official [parkervcp/eggs](https://github.com/parkervcp/eggs) 
+ - They have been made to cover some edge-cases that some people want (which are not always supported nor recommended by Pterodactyl)
+ - If you need support in any way, join our Discored or use GitHubs discusions.
+ - Regarding caddy & caddy-php:
+   - The web eggs in this repository are meant for experimentation, development (stage/dev instances) or testing stuff
+   - Production use is theoretically possible but in no way recommended
+   - You cannot use ports below 1024 (80 for HTTP and 443 for HTTPS are not possible!)
+   - We recommend a reverse proxy with a basic auth infront of the servers and a properly configured firewall 
+  
+_You wont get any support for our eggs in the official [parkervcp/eggs](https://github.com/parkervcp/eggs) repo or on the official Pterodactyl Discord! Use our repo or Discord for support!_
+
 ## Links to Eggs
 
 ### Services
