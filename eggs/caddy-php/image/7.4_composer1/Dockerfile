@@ -59,7 +59,6 @@ RUN docker-php-ext-install \
         mysqli \
         gd \
         fileinfo \
-        iconv \
         phar \
         simplexml \
         xml \
