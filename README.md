@@ -1,4 +1,18 @@
-# Custom Eggs
+<div align="center">
+
+# Lazy Bytez Custom Eggs
+
+![license-info][license-info]
+![discord-info][discord-info]
+
+![commit-info][commit-info]
+![contributors-info][contributors-info]
+![reposize-info][reposize-info]
+![stars][stars]
+
+</div>
+
+## Description
 In this repository you find some custom eggs that do not fit in the official [parkervcp/eggs](https://github.com/parkervcp/eggs) repository like webservers or very specific software.
 
 ## Links to Eggs
@@ -38,3 +52,11 @@ If you want to take part in contribution, like fixing issues and contributing di
 [github-issues]: https://github.com/lazybytez/eggs/issues
 [github-pulls]: https://github.com/lazybytez/eggs/pulls
 [github-security]: https://github.com/lazybytez/eggs/blob/master/SECURITY.md
+
+
+[license-info]: https://img.shields.io/github/license/lazybytez/custom-eggs?logo=gnu&style=for-the-badge&colorA=302D41&colorB=f9e2af&logoColor=f9e2af
+[discord-info]: https://img.shields.io/discord/735171597362659328?label=Discord&logo=discord&logoColor=b4befe&style=for-the-badge&colorA=302D41&colorB=b4befe
+[commit-info]: https://img.shields.io/github/last-commit/lazybytez/custom-eggs?style=for-the-badge&colorA=302D41&colorB=b4befe
+[contributors-info]: https://img.shields.io/github/contributors/lazybytez/custom-eggs?style=for-the-badge&colorA=302D41&colorB=cba6f7
+[reposize-info]: https://img.shields.io/github/repo-size/lazybytez/custom-eggs?style=for-the-badge&colorA=302D41&colorB=89dceb
+[stars]: https://img.shields.io/github/stars/lazybytez/custom-eggs?colorA=302D41&colorB=f9e2af&style=for-the-badge

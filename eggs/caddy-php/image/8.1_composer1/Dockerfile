@@ -57,7 +57,6 @@ RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
         mysqli \
         gd \
         fileinfo \
-        iconv \
         phar \
         simplexml \
         xml \
