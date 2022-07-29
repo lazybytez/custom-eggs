@@ -12,8 +12,9 @@ jobs:
         uses: deepakputhraya/action-branch-name@master
         with:
           regex: '([a-zA-Z0-0-])+\/([a-zA-Z0-0-])+'
-          allowed_prefixes: "feature,hotfix,release"
-          ignore: master,develop
+          allowed_prefixes: "feature,hotfix,release,dependabot"
+          ignore: main,develop
+
   # Verify that the commits matches the format
   verify_commit_messages:
     runs-on: ubuntu-latest

@@ -1,0 +1,5 @@
+# This file defines who is responsible for which part of the code
+
+# In the following pattern, we assign responsibility for all code
+# throughout the repository to our organization group called oss-maintainers
+* @lazybytez/oss-maintainers
