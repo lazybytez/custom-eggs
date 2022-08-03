@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-08-02T20:52:08+02:00",
+    "name": "JoJo Discord Bot",
+    "author": "elias.knodel@gmail.com",
+    "description": "A pterodactyl egg for the jojo-discord-bot.",
+    "features": null,
+    "docker_images": {
+        "ghcr jojo-discord-bot": "ghcr.io\/lazybytez\/custom-eggs:jojo-discord-bot_stable"
+    },
+    "file_denylist": [],
+    "startup": "\/app\/jojo-discord-bot",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Bot is running.\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "",
+            "container": "alpine:latest",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Discord Bot Token",
+            "description": "Your private Discord Bot Token.",
+            "env_variable": "DISCORD_BOT_TOKEN",
+            "default_value": "example.veryunreadablenumberandcharactercombination123",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        }
+    ]
+}
