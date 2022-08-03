@@ -44,6 +44,10 @@ on the official Pterodactyl Discord! Use **our repo or Discord** for support!_
 - [grafana-image-renderer](/eggs/grafana-image-renderer/)
 - [mariadb-openssl](/eggs/mariadb-openssl)
 
+### Discord Bots
+
+- [JoJo](/eggs/jojo-discord-bot/)
+
 ## Docker Images
 
 Images used by the eggs of this repository can be found on ghcr. Refer to the packages section and
