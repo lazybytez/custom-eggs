@@ -10,7 +10,8 @@
     "description": "A pterodactyl egg for the jojo-discord-bot.",
     "features": null,
     "docker_images": {
-        "ghcr jojo-discord-bot": "ghcr.io\/lazybytez\/custom-eggs:jojo-discord-bot_stable"
+        "ghcr jojo-discord-bot": "ghcr.io\/lazybytez\/custom-eggs:jojo-discord-bot_stable",
+        "ghcr jojo-discord-bot edge": "ghcr.io\/lazybytez\/custom-eggs:jojo-discord-bot_edge"
     },
     "file_denylist": [],
     "startup": "\/app\/jojo-discord-bot",

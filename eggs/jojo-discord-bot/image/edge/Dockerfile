@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM ghcr.io/lazybytez/jojo-discord-bot:latest
+FROM --platform=$BUILDPLATFORM ghcr.io/lazybytez/jojo-discord-bot:edge
 
 LABEL author="LazyBytez" maintainer="contact@lazybytez.de"
 
